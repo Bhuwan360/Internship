@@ -1,0 +1,166 @@
+// Product catalog for DRIFT. In a real deployment this would be fetched
+// from a CMS or commerce API — kept as a static module here so the whole
+// app runs with zero backend and zero image requests.
+
+export const CATEGORIES = [
+  { id: "brewers", label: "Brewers" },
+  { id: "grinders", label: "Grinders" },
+  { id: "beans", label: "Beans" },
+  { id: "accessories", label: "Accessories" },
+];
+
+export const PRODUCTS = [
+  {
+    id: "kettle-slow-pour",
+    name: "Slow-Pour Kettle",
+    category: "brewers",
+    price: 78,
+    roast: 0,
+    tags: ["new"],
+    icon: "kettle",
+    blurb: "Gooseneck kettle with a fixed-rate spout for even, unhurried extraction.",
+    specs: { Capacity: "900ml", Material: "Stainless steel", Heat: "Stovetop / induction" },
+  },
+  {
+    id: "dripper-fluted",
+    name: "Fluted Ceramic Dripper",
+    category: "brewers",
+    price: 44,
+    roast: 0,
+    tags: [],
+    icon: "dripper",
+    blurb: "Wide flow channels keep water moving instead of pooling.",
+    specs: { Capacity: "1–2 cups", Material: "Stoneware", Filter: "Cone, size 02" },
+  },
+  {
+    id: "press-double-wall",
+    name: "Double-Wall Press",
+    category: "brewers",
+    price: 62,
+    roast: 0,
+    tags: [],
+    icon: "press",
+    blurb: "Insulated body holds temperature through a full four-minute steep.",
+    specs: { Capacity: "1L", Material: "Borosilicate + steel", Mesh: "3-part filter" },
+  },
+  {
+    id: "brewer-siphon",
+    name: "Siphon Brewer",
+    category: "brewers",
+    price: 129,
+    roast: 0,
+    tags: ["featured"],
+    icon: "siphon",
+    blurb: "Vapor pressure brewing for a clean, tea-like cup and a bit of theater.",
+    specs: { Capacity: "3 cups", Material: "Glass + walnut", Heat: "Butane burner incl." },
+  },
+  {
+    id: "grinder-hand",
+    name: "Hand Grinder Mk. II",
+    category: "grinders",
+    price: 96,
+    roast: 0,
+    tags: ["featured"],
+    icon: "grinder",
+    blurb: "Conical steel burrs, 40 click-stops from espresso to French press.",
+    specs: { Burrs: "Steel, conical", Capacity: "30g", Body: "Anodized aluminum" },
+  },
+  {
+    id: "grinder-electric",
+    name: "Electric Burr Grinder",
+    category: "grinders",
+    price: 189,
+    roast: 0,
+    tags: [],
+    icon: "grinder-e",
+    blurb: "Flat steel burrs and a timer dial for repeatable morning dosing.",
+    specs: { Burrs: "Flat steel, 40mm", Settings: "30 grind steps", Hopper: "250g" },
+  },
+  {
+    id: "beans-ethiopia",
+    name: "Ethiopia Guji — Light Roast",
+    category: "beans",
+    price: 21,
+    roast: 1,
+    tags: ["new"],
+    icon: "bag",
+    blurb: "Jasmine and stone fruit up front, a bright and syrupy finish.",
+    specs: { Origin: "Guji, Ethiopia", Process: "Washed", Roast: "Light" },
+  },
+  {
+    id: "beans-colombia",
+    name: "Huila Colombia — Medium Roast",
+    category: "beans",
+    price: 19,
+    roast: 3,
+    tags: [],
+    icon: "bag",
+    blurb: "Caramel and red apple with a balanced, cocoa-toned body.",
+    specs: { Origin: "Huila, Colombia", Process: "Washed", Roast: "Medium" },
+  },
+  {
+    id: "beans-sumatra",
+    name: "Sumatra Lintong — Dark Roast",
+    category: "beans",
+    price: 20,
+    roast: 5,
+    tags: [],
+    icon: "bag",
+    blurb: "Earthy, low-acid, and heavy-bodied — built for milk.",
+    specs: { Origin: "Lintong, Sumatra", Process: "Wet-hulled", Roast: "Dark" },
+  },
+  {
+    id: "beans-decaf",
+    name: "Decaf House Blend",
+    category: "beans",
+    price: 19,
+    roast: 3,
+    tags: [],
+    icon: "bag",
+    blurb: "Swiss-water processed. All the ritual, none of the buzz.",
+    specs: { Origin: "Blend", Process: "Swiss Water", Roast: "Medium" },
+  },
+  {
+    id: "scale-precision",
+    name: "Precision Brew Scale",
+    category: "accessories",
+    price: 54,
+    roast: 0,
+    tags: ["featured"],
+    icon: "scale",
+    blurb: "0.1g resolution with a built-in flow-rate timer.",
+    specs: { Resolution: "0.1g", Capacity: "2kg", Battery: "USB-C rechargeable" },
+  },
+  {
+    id: "filters-cotton",
+    name: "Reusable Cotton Filters",
+    category: "accessories",
+    price: 16,
+    roast: 0,
+    tags: [],
+    icon: "filter",
+    blurb: "Cloth filters that soften acidity and cut down on waste.",
+    specs: { Pack: "Set of 2", Fits: "Cone drippers", Care: "Rinse, air dry" },
+  },
+  {
+    id: "canister-storage",
+    name: "Airtight Bean Canister",
+    category: "accessories",
+    price: 34,
+    roast: 0,
+    tags: [],
+    icon: "canister",
+    blurb: "One-way CO2 valve keeps beans fresh for weeks, not days.",
+    specs: { Capacity: "500g", Material: "Powder-coated steel", Valve: "One-way degassing" },
+  },
+];
+
+export function getProduct(id) {
+  return PRODUCTS.find((p) => p.id === id) || null;
+}
+
+export function getRelated(product, count = 4) {
+  return PRODUCTS.filter(
+    (p) => p.id !== product.id && p.category === product.category
+  ).slice(0, count);
+}
